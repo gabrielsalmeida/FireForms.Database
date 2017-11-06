@@ -1,0 +1,6 @@
+D:\Projects\FireSharp.Database\FireSharp.Database\bin\Debug\netstandard2.0\Firebase.Database.deps.json
+D:\Projects\FireSharp.Database\FireSharp.Database\bin\Debug\netstandard2.0\Firebase.Database.dll
+D:\Projects\FireSharp.Database\FireSharp.Database\obj\Debug\netstandard2.0\Firebase.Database.csprojResolveAssemblyReference.cache
+D:\Projects\FireSharp.Database\FireSharp.Database\obj\Debug\netstandard2.0\Firebase.Database.csproj.CoreCompileInputs.cache
+D:\Projects\FireSharp.Database\FireSharp.Database\obj\Debug\netstandard2.0\Firebase.Database.AssemblyInfoInputs.cache
+D:\Projects\FireSharp.Database\FireSharp.Database\obj\Debug\netstandard2.0\Firebase.Database.AssemblyInfo.cs

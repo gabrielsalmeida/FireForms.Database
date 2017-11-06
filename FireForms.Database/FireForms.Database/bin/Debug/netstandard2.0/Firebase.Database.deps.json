@@ -1,0 +1,75 @@
+{
+  "runtimeTarget": {
+    "name": ".NETStandard,Version=v2.0/",
+    "signature": "47ddd9d1eac3d2a3b66e65c3d2a8cda2a6fe10b7"
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETStandard,Version=v2.0": {},
+    ".NETStandard,Version=v2.0/": {
+      "Firebase.Database/1.0.0": {
+        "dependencies": {
+          "LiteDB": "3.1.4",
+          "NETStandard.Library": "2.0.0",
+          "Xamarin.Forms": "2.3.4.270"
+        },
+        "runtime": {
+          "Firebase.Database.dll": {}
+        }
+      },
+      "LiteDB/3.1.4": {
+        "runtime": {
+          "lib/netstandard1.3/LiteDB.dll": {}
+        }
+      },
+      "Microsoft.NETCore.Platforms/1.1.0": {},
+      "NETStandard.Library/2.0.0": {
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "1.1.0"
+        }
+      },
+      "Xamarin.Forms/2.3.4.270": {
+        "runtime": {
+          "lib/portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20/Xamarin.Forms.Core.dll": {},
+          "lib/portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20/Xamarin.Forms.Platform.dll": {},
+          "lib/portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20/Xamarin.Forms.Xaml.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Firebase.Database/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "LiteDB/3.1.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Z8+ZCkOZ5lhRWPlQ02yneCbrARyiY+Tex/AJ/LVaJAGUKgc6lg2MM18c6xImoq5xs4TLUojUVEPzEyiO1uoQtA==",
+      "path": "litedb/3.1.4",
+      "hashPath": "litedb.3.1.4.nupkg.sha512"
+    },
+    "Microsoft.NETCore.Platforms/1.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-kz0PEW2lhqygehI/d6XsPCQzD7ff7gUJaVGPVETX611eadGsA3A877GdSlU0LRVMCTH/+P3o2iDTak+S08V2+A==",
+      "path": "microsoft.netcore.platforms/1.1.0",
+      "hashPath": "microsoft.netcore.platforms.1.1.0.nupkg.sha512"
+    },
+    "NETStandard.Library/2.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-7jnbRU+L08FXKMxqUflxEXtVymWvNOrS8yHgu9s6EM8Anr6T/wIX4nZ08j/u3Asz+tCufp3YVwFSEvFTPYmBPA==",
+      "path": "netstandard.library/2.0.0",
+      "hashPath": "netstandard.library.2.0.0.nupkg.sha512"
+    },
+    "Xamarin.Forms/2.3.4.270": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-D4QNulRsghAnjGefCuxvHaH9xLdk9gmSrqSoyIH9YqRa/+HNil7nLCt3Dwb7np1eNlKD6AoW+Kgv9Umur/yoUQ==",
+      "path": "xamarin.forms/2.3.4.270",
+      "hashPath": "xamarin.forms.2.3.4.270.nupkg.sha512"
+    }
+  }
+}
