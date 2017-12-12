@@ -13,6 +13,7 @@ using System.Reflection;
 
 [assembly: System.Reflection.AssemblyCompanyAttribute("Gabriel Santos de Almeida")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
+[assembly: System.Reflection.AssemblyDescriptionAttribute("Wrapper for Firebase REST API for .NET")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("0.0.1.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("0.1.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("FireForms.Database")]

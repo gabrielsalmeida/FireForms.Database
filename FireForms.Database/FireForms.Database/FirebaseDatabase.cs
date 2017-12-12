@@ -14,7 +14,7 @@ namespace FireForms.Database
         public FirebaseDatabase(Uri databaseURL, string authToken)
         {
             this.databaseURL = databaseURL;
-            this.authToken = authToken;
+            this.AuthToken = authToken;
         }
 
         private Uri databaseURL;
@@ -22,47 +22,43 @@ namespace FireForms.Database
         public Uri DatabaseURL
         {
             get { return databaseURL; }
-            //set { databaseURL = value; }
         }
 
-        private string authToken;
+        public string AuthToken { get; set; }
 
-        public string AuthToken
-        {
-            //get { return authToken; }
-            set { authToken = value; }
-        }
-        
 
         private String target;
 
         public String Target
         {
             get { return target; }
-            //set { path = value; }
+            
         }
 
+        public Uri FullUri
+        {
+            get;
+            set;
+        }
 
         public FirebaseDatabase Child(string path)
         {
-            
-            databaseURL = new Uri(databaseURL + "/" + path);
-            return new FirebaseDatabase(databaseURL.AbsoluteUri);
+            UriBuilder uriBuilder = new UriBuilder(databaseURL);
+            uriBuilder.Path += path + "/";
+            databaseURL = uriBuilder.Uri;            
+            return this;
         }
 
-        internal FirebaseDatabase SetTarget(string path)
+        public FirebaseDatabase SetTarget(string path)
         {
-            this.target = path;
-            databaseURL = new Uri(databaseURL + "/" + this.target + ".json");
-            if (!String.IsNullOrWhiteSpace(this.authToken))
-            {
-                databaseURL = new Uri(databaseURL, "?auth="+authToken);
-                
-            }
-            return new FirebaseDatabase(databaseURL.AbsoluteUri);
+            UriBuilder uriBuilder = new UriBuilder(databaseURL);
+            uriBuilder.Path += path + ".json";
+            target = path;
+            FullUri = uriBuilder.Uri;            
+            return this;
         }
 
-        
+
 
     }
 }
