@@ -1,21 +1,18 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FireForms.Database
+namespace FireForms.Database.Exceptions
 {
-    public class FireFormsException : Exception
+    public class ServiceUnavailableException : Exception
     {
-        public FireFormsException()
+        public ServiceUnavailableException()
         {
         }
 
-        public FireFormsException(string message) : base(message)
+        public ServiceUnavailableException(string message) : base(message)
         {
         }
 
-        public FireFormsException(string message, Exception innerException) : base(message, innerException)
+        public ServiceUnavailableException(string message, Exception innerException) : base(message, innerException)
         {
         }
 
@@ -36,11 +33,10 @@ namespace FireForms.Database
             return base.GetBaseException();
         }
 
-
-
         public override string ToString()
         {
             return base.ToString();
         }
+
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Web;
 using System.Collections.Generic;
 using System.Text;
+
 
 namespace FireForms.Database
 {
@@ -14,7 +16,7 @@ namespace FireForms.Database
         public FirebaseDatabase(Uri databaseURL, string authToken)
         {
             this.databaseURL = databaseURL;
-            this.AuthToken = authToken;
+            this.AccessToken = authToken;
         }
 
         private Uri databaseURL;
@@ -24,7 +26,7 @@ namespace FireForms.Database
             get { return databaseURL; }
         }
 
-        public string AuthToken { get; set; }
+        public string AccessToken { get; set; }
 
 
         private String target;
@@ -53,6 +55,11 @@ namespace FireForms.Database
         {
             UriBuilder uriBuilder = new UriBuilder(databaseURL);
             uriBuilder.Path += path + ".json";
+            if (AccessToken != null)
+            {
+                string query = String.Format("access_token={0}", AccessToken);
+                uriBuilder.Query = query;
+            }
             target = path;
             FullUri = uriBuilder.Uri;            
             return this;

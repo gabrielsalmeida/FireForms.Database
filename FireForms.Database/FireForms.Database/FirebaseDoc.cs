@@ -13,6 +13,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using FireForms.Database.Exceptions;
 
 namespace FireForms.Database
 {
@@ -220,7 +221,7 @@ namespace FireForms.Database
             }
             else
             {
-                throw new FireFormsException("Not found or no internet access(No cached instance found too)");
+                throw FireFormsException.from(response.StatusCode);
             }
         }
 
@@ -235,7 +236,7 @@ namespace FireForms.Database
             }
             else
             {
-                throw new FireFormsException("Not found or no internet access(No cached instance found too)");
+                throw FireFormsException.from(response.StatusCode);
             }
         }
 
@@ -252,7 +253,9 @@ namespace FireForms.Database
                 {
                     return null;
                 }
-                response.EnsureSuccessStatusCode();
+                if (!response.IsSuccessStatusCode){
+                    throw FireFormsException.from(response.StatusCode);
+                }
                 var settings = new JsonSerializerSettings
                 {
                     NullValueHandling = NullValueHandling.Ignore,
@@ -263,7 +266,7 @@ namespace FireForms.Database
                     obj = JsonConvert.DeserializeObject<Dictionary<string, T>>(responseData, settings);
                     values = obj.Values;
                 }
-                catch (JsonSerializationException ex)
+                catch (JsonSerializationException)
                 {
                     var arr = JsonConvert.DeserializeObject<IEnumerable<T>>(responseData, settings);
                     values = arr.Where(x => x != null).ToArray<T>();
@@ -272,19 +275,20 @@ namespace FireForms.Database
                 {
                     Collection.Upsert(values);
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     throw;
                 }
                 return values;
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 values = Collection.FindAll();
+
                 if (values == null)
                 {
-                    throw new FireFormsException("Not found or no internet access(No cached instance found too)");
+                    throw FireFormsException.from(System.Net.HttpStatusCode.NotFound);
                 }
                 return values;
             }
@@ -312,7 +316,11 @@ namespace FireForms.Database
                 obj = Collection.FindOne(predicate);
                 if (obj == null)
                 {
-                    throw new FireFormsException("Not found or no internet access(No cached instance found too)");
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        throw FireFormsException.from(response.StatusCode);
+                    }
+					
                 }
                 return obj;
             }

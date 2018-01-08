@@ -2,8 +2,14 @@
   "version": 3,
   "targets": {
     ".NETStandard,Version=v1.3": {
-      "LiteDB/3.1.4": {
+      "LiteDB/4.1.0": {
         "type": "package",
+        "dependencies": {
+          "NETStandard.Library": "1.6.1",
+          "System.Reflection": "4.3.0",
+          "System.Reflection.TypeExtensions": "4.3.0",
+          "System.Threading.Thread": "4.0.0"
+        },
         "compile": {
           "lib/netstandard1.3/LiteDB.dll": {}
         },
@@ -817,7 +823,7 @@
           "System.Runtime": "4.3.0"
         },
         "compile": {
-          "ref/netstandard1.3/_._": {}
+          "ref/netstandard1.3/System.Reflection.TypeExtensions.dll": {}
         }
       },
       "System.Resources.ResourceManager/4.3.0": {
@@ -1098,6 +1104,18 @@
           "lib/netstandard1.0/System.Threading.Tasks.Extensions.dll": {}
         }
       },
+      "System.Threading.Thread/4.0.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Runtime": "4.1.0"
+        },
+        "compile": {
+          "ref/netstandard1.3/System.Threading.Thread.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/System.Threading.Thread.dll": {}
+        }
+      },
       "System.Threading.Timer/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -1182,18 +1200,20 @@
     }
   },
   "libraries": {
-    "LiteDB/3.1.4": {
-      "sha512": "Z8+ZCkOZ5lhRWPlQ02yneCbrARyiY+Tex/AJ/LVaJAGUKgc6lg2MM18c6xImoq5xs4TLUojUVEPzEyiO1uoQtA==",
+    "LiteDB/4.1.0": {
+      "sha512": "5NVulWIz6bmXgdrHTI9pZe0OL0i5rh+XvfDpnuUK0helyVeoxLQl7pjXFF9nxaGNnL9Z75j3OeVdMtGsvsnxGw==",
       "type": "package",
-      "path": "litedb/3.1.4",
+      "path": "litedb/4.1.0",
       "files": [
         "lib/net35/LiteDB.dll",
         "lib/net35/LiteDB.xml",
-        "lib/net462/LiteDB.dll",
-        "lib/net462/LiteDB.xml",
+        "lib/net40/LiteDB.dll",
+        "lib/net40/LiteDB.xml",
         "lib/netstandard1.3/LiteDB.dll",
         "lib/netstandard1.3/LiteDB.xml",
-        "litedb.3.1.4.nupkg.sha512",
+        "lib/netstandard2.0/LiteDB.dll",
+        "lib/netstandard2.0/LiteDB.xml",
+        "litedb.4.1.0.nupkg.sha512",
         "litedb.nuspec"
       ]
     },
@@ -1328,7 +1348,7 @@
       ]
     },
     "Newtonsoft.Json/10.0.3": {
-      "sha512": "wBM7i7i3U2WX0ecor4zdVGvgrwFUjuigBoHKiL+nH39fCOpCPjBY3RDqJM32edvdyTAVdjzlccHsg41+/+zpSA==",
+      "sha512": "hSXaFmh7hNCuEoC4XNY5DrRkLDzYHqPx/Ik23R4J86Z7PE/Y6YidhG602dFVdLBRSdG6xp9NabH3dXpcoxWvww==",
       "type": "package",
       "path": "newtonsoft.json/10.0.3",
       "files": [
@@ -4535,6 +4555,44 @@
         "system.threading.tasks.extensions.nuspec"
       ]
     },
+    "System.Threading.Thread/4.0.0": {
+      "sha512": "gIdJqDXlOr5W9zeqFErLw3dsOsiShSCYtF9SEHitACycmvNvY8odf9kiKvp6V7aibc8C4HzzNBkWXjyfn7plbQ==",
+      "type": "package",
+      "path": "system.threading.thread/4.0.0",
+      "files": [
+        "ThirdPartyNotices.txt",
+        "dotnet_library_license.txt",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net46/System.Threading.Thread.dll",
+        "lib/netcore50/_._",
+        "lib/netstandard1.3/System.Threading.Thread.dll",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net46/System.Threading.Thread.dll",
+        "ref/netstandard1.3/System.Threading.Thread.dll",
+        "ref/netstandard1.3/System.Threading.Thread.xml",
+        "ref/netstandard1.3/de/System.Threading.Thread.xml",
+        "ref/netstandard1.3/es/System.Threading.Thread.xml",
+        "ref/netstandard1.3/fr/System.Threading.Thread.xml",
+        "ref/netstandard1.3/it/System.Threading.Thread.xml",
+        "ref/netstandard1.3/ja/System.Threading.Thread.xml",
+        "ref/netstandard1.3/ko/System.Threading.Thread.xml",
+        "ref/netstandard1.3/ru/System.Threading.Thread.xml",
+        "ref/netstandard1.3/zh-hans/System.Threading.Thread.xml",
+        "ref/netstandard1.3/zh-hant/System.Threading.Thread.xml",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "system.threading.thread.4.0.0.nupkg.sha512",
+        "system.threading.thread.nuspec"
+      ]
+    },
     "System.Threading.Timer/4.3.0": {
       "sha512": "Z6YfyYTCg7lOZjJzBjONJTFKGN9/NIYKSxhU5GRd+DTwHSZyvWp1xuI5aR+dLg+ayyC5Xv57KiY4oJ0tMO89fQ==",
       "type": "package",
@@ -4766,7 +4824,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v1.3": [
-      "LiteDB >= 3.1.4",
+      "LiteDB >= 4.1.0",
       "NETStandard.Library >= 1.6.1",
       "Newtonsoft.Json >= 10.0.3",
       "System.Reactive >= 3.1.1",
@@ -4776,34 +4834,28 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\gabri\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "/Users/gabrielsantosdealmeida/.nuget/packages/": {},
+    "/usr/local/share/dotnet/sdk/NuGetFallbackFolder": {}
   },
   "project": {
     "version": "0.1.0",
-    "restoreSettings": {
-      "hideWarningsAndErrors": true
-    },
     "restore": {
-      "projectUniqueName": "D:\\Projects\\GitHubContributions\\FireForms\\FireForms.Database\\FireForms.Database\\FireForms.Database\\FireForms.Database.csproj",
+      "projectUniqueName": "/Users/gabrielsantosdealmeida/FireForms.Database/FireForms.Database/FireForms.Database/FireForms.Database.csproj",
       "projectName": "FireForms.Database",
-      "projectPath": "D:\\Projects\\GitHubContributions\\FireForms\\FireForms.Database\\FireForms.Database\\FireForms.Database\\FireForms.Database.csproj",
-      "packagesPath": "C:\\Users\\gabri\\.nuget\\packages\\",
-      "outputPath": "D:\\Projects\\GitHubContributions\\FireForms\\FireForms.Database\\FireForms.Database\\FireForms.Database\\obj\\",
+      "projectPath": "/Users/gabrielsantosdealmeida/FireForms.Database/FireForms.Database/FireForms.Database/FireForms.Database.csproj",
+      "packagesPath": "/Users/gabrielsantosdealmeida/.nuget/packages/",
+      "outputPath": "/Users/gabrielsantosdealmeida/FireForms.Database/FireForms.Database/FireForms.Database/obj",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\gabri\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/gabrielsantosdealmeida/.config/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netstandard1.3"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "http://mobile.nuget.couchbase.com/nuget/Developer/": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -4820,24 +4872,17 @@
     "frameworks": {
       "netstandard1.3": {
         "dependencies": {
-          "LiteDB": {
-            "target": "Package",
-            "version": "3.1.4"
-          },
           "NETStandard.Library": {
+            "suppressParent": "All",
             "target": "Package",
             "version": "1.6.1",
             "autoReferenced": true
           },
-          "System.Reactive.Interfaces": {
+          "Newtonsoft.Json": {
             "target": "Package",
-            "version": "3.1.1"
+            "version": "10.0.3"
           },
           "System.Reactive": {
-            "target": "Package",
-            "version": "3.1.1"
-          },
-          "System.Reactive.Linq": {
             "target": "Package",
             "version": "3.1.1"
           },
@@ -4845,9 +4890,17 @@
             "target": "Package",
             "version": "3.1.1"
           },
-          "Newtonsoft.Json": {
+          "System.Reactive.Interfaces": {
             "target": "Package",
-            "version": "10.0.3"
+            "version": "3.1.1"
+          },
+          "System.Reactive.Linq": {
+            "target": "Package",
+            "version": "3.1.1"
+          },
+          "LiteDB": {
+            "target": "Package",
+            "version": "4.1.0"
           }
         }
       }
