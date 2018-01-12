@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETStandard,Version=v1.3/",
-    "signature": "e42dc7a62f3db8fbb199e8a95f715954c6e2148c"
+    "signature": "6642d49cfcb05a01d1242030fbc943190e58b1f1"
   },
   "compilationOptions": {},
   "targets": {
@@ -9,7 +9,7 @@
     ".NETStandard,Version=v1.3/": {
       "FireForms.Database/0.1.0": {
         "dependencies": {
-          "LiteDB": "4.1.0",
+          "LiteDB": "3.1.4",
           "NETStandard.Library": "1.6.1",
           "Newtonsoft.Json": "10.0.3",
           "System.Reactive": "3.1.1",
@@ -21,13 +21,7 @@
           "FireForms.Database.dll": {}
         }
       },
-      "LiteDB/4.1.0": {
-        "dependencies": {
-          "NETStandard.Library": "1.6.1",
-          "System.Reflection": "4.3.0",
-          "System.Reflection.TypeExtensions": "4.3.0",
-          "System.Threading.Thread": "4.0.0"
-        },
+      "LiteDB/3.1.4": {
         "runtime": {
           "lib/netstandard1.3/LiteDB.dll": {}
         }
@@ -724,14 +718,6 @@
           "lib/netstandard1.0/System.Threading.Tasks.Extensions.dll": {}
         }
       },
-      "System.Threading.Thread/4.0.0": {
-        "dependencies": {
-          "System.Runtime": "4.3.0"
-        },
-        "runtime": {
-          "lib/netstandard1.3/System.Threading.Thread.dll": {}
-        }
-      },
       "System.Threading.Timer/4.3.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.1.0",
@@ -805,12 +791,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "LiteDB/4.1.0": {
+    "LiteDB/3.1.4": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-5NVulWIz6bmXgdrHTI9pZe0OL0i5rh+XvfDpnuUK0helyVeoxLQl7pjXFF9nxaGNnL9Z75j3OeVdMtGsvsnxGw==",
-      "path": "litedb/4.1.0",
-      "hashPath": "litedb.4.1.0.nupkg.sha512"
+      "sha512": "sha512-Z8+ZCkOZ5lhRWPlQ02yneCbrARyiY+Tex/AJ/LVaJAGUKgc6lg2MM18c6xImoq5xs4TLUojUVEPzEyiO1uoQtA==",
+      "path": "litedb/3.1.4",
+      "hashPath": "litedb.3.1.4.nupkg.sha512"
     },
     "Microsoft.CSharp/4.3.0": {
       "type": "package",
@@ -1350,13 +1336,6 @@
       "sha512": "sha512-npvJkVKl5rKXrtl1Kkm6OhOUaYGEiF9wFbppFRWSMoApKzt2PiPHT2Bb8a5sAWxprvdOAtvaARS9QYMznEUtug==",
       "path": "system.threading.tasks.extensions/4.3.0",
       "hashPath": "system.threading.tasks.extensions.4.3.0.nupkg.sha512"
-    },
-    "System.Threading.Thread/4.0.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-gIdJqDXlOr5W9zeqFErLw3dsOsiShSCYtF9SEHitACycmvNvY8odf9kiKvp6V7aibc8C4HzzNBkWXjyfn7plbQ==",
-      "path": "system.threading.thread/4.0.0",
-      "hashPath": "system.threading.thread.4.0.0.nupkg.sha512"
     },
     "System.Threading.Timer/4.3.0": {
       "type": "package",

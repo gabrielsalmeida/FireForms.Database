@@ -282,6 +282,32 @@ namespace FireForms.Database
                 return values;
 
             }
+            catch (UnauthorizedException)
+            {
+                throw;
+            }
+            catch (NotFoundException)
+            {
+                values = Collection.FindAll();
+
+                if (values == null)
+                {
+                    throw FireFormsException.from(System.Net.HttpStatusCode.NotFound);
+                }
+                return values;
+            }
+            catch (InternalServerErrorException)
+            {
+                throw;
+            }
+            catch (PreconditionFailedException)
+            {
+                throw;
+            }
+            catch (BadRequestException)
+            {
+                throw;
+            }
             catch (Exception)
             {
                 values = Collection.FindAll();
@@ -325,9 +351,6 @@ namespace FireForms.Database
                 return obj;
             }
         }
-
-
-
 
         public int Sync()
         {

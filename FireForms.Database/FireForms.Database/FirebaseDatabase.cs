@@ -12,11 +12,21 @@ namespace FireForms.Database
             this.databaseURL = new Uri(databaseURL);
         }
 
-        public FirebaseDatabase(Uri databaseURL, string authToken)
+        public FirebaseDatabase(string databaseURL, string authToken)
         {
-            this.databaseURL = databaseURL;
+            this.databaseURL = new Uri(databaseURL);
             this.AccessToken = authToken;
         }
+
+        public FirebaseDatabase(string databaseURL, string authToken, string refreshToken, string apiKey)
+        {
+            this.databaseURL = new Uri(databaseURL);
+            this.AccessToken = authToken;
+            this.RefreshToken = refreshToken;
+            this.ApiKey = apiKey;
+        }
+
+
 
         private Uri databaseURL;
 
@@ -27,6 +37,9 @@ namespace FireForms.Database
 
         public string AccessToken { get; set; }
 
+        public string RefreshToken { get; set; }
+
+        public string ApiKey { get; set; }
 
         private String target;
 
@@ -56,7 +69,7 @@ namespace FireForms.Database
             uriBuilder.Path += path + ".json";
             if (AccessToken != null)
             {
-                string query = String.Format("access_token={0}", AccessToken);
+                string query = String.Format("?auth={0}", AccessToken);
                 uriBuilder.Query = query;
             }
             target = path;
