@@ -28,7 +28,7 @@ namespace FireForms.Database.Exceptions
                     return new BadRequestException();
 
                 case System.Net.HttpStatusCode.Unauthorized:
-                    return new UnauthorizedAccessException();
+                    return new UnauthorizedException();
 
                 case System.Net.HttpStatusCode.NotFound:
                     return new NotFoundException("Not found or no internet access(No cached instance found too)");

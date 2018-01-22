@@ -14,51 +14,31 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using FireForms.Database.Exceptions;
+using FireForms.Database.Model;
 
 namespace FireForms.Database
 {
-    public class FirebaseDoc<T>
+    public class FirebaseDoc<T> : IFirebaseDoc<T>
     {
 
         public FirebaseDoc(FirebaseDatabase firebaseDatabase, string localDBpath)
         {
             Init(localDBpath);
-            this.firebaseDatabase = firebaseDatabase;
-
+            this.FirebaseDatabase = firebaseDatabase;
         }
 
-        private FirebaseDatabase firebaseDatabase;
-
-        public void SetFirebaseDatabase(FirebaseDatabase value)
-        { firebaseDatabase = value; }
-
-        public Dictionary<string, FirebaseDoc<object>> DbRef { get; set; }
+        public FirebaseDatabase FirebaseDatabase { get; set; }
 
         public LiteCollection<T> Collection { get; set; }
 
-        private BsonMapper mapper;
-
-        public string AccessToken { get; set; }
-
-        private string localDBpath;
-
         private LiteDatabase liteDatabase;
 
-        private void Init(string localDBpath)
+        private void Init(string LocalDBpath)
         {
-            this.localDBpath = localDBpath;
-            using (liteDatabase = new LiteDatabase(localDBpath))
+            using (liteDatabase = new LiteDatabase(LocalDBpath))
             {
                 Collection = liteDatabase.GetCollection<T>(typeof(T).Name);
             }
-        }
-
-        private ObservableCollection<T> observableCollection;
-
-        public ObservableCollection<T> AsObservableCollection()
-        {
-            observableCollection = new ObservableCollection<T>(Collection.FindAll());
-            return observableCollection;
         }
 
         private bool isListening;
@@ -80,7 +60,7 @@ namespace FireForms.Database
             {
                 try
                 {
-                    var request = new HttpRequestMessage(HttpMethod.Get, firebaseDatabase.FullUri);
+                    var request = new HttpRequestMessage(HttpMethod.Get, FirebaseDatabase.FullUri);
                     var response = await httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
                     response.EnsureSuccessStatusCode();
                     string operation = "";
@@ -142,7 +122,6 @@ namespace FireForms.Database
                         }
                         else
                         {
-                            
                             Collection.Upsert(JsonConvert.DeserializeObject<T>(data));
                         }
                         break;
@@ -189,23 +168,17 @@ namespace FireForms.Database
 
         public async Task<StatusEnum> UpsertAsync(T obj)
         {
-            mapper = BsonMapper.Global;
             Collection.Upsert(obj);
             var mobj = BsonMapper.Global.ToDocument<T>(obj);
             HttpClient client = new HttpClient();
-            var response = await client.PutAsync($"{firebaseDatabase.DatabaseURL}/{firebaseDatabase.Target}/{mobj["_id"].AsString}.json", new StringContent(JsonConvert.SerializeObject(obj), Encoding.UTF8, "application/json")).ConfigureAwait(false);
+            var response = await client.PutAsync($"{FirebaseDatabase.DatabaseURL}/{FirebaseDatabase.Target}/{mobj["_id"].AsString}.json", new StringContent(JsonConvert.SerializeObject(obj), Encoding.UTF8, "application/json")).ConfigureAwait(false);
             if (response.IsSuccessStatusCode)
             {
                 return StatusEnum.ALLSUCCESS;
             }
             else
             {
-                if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
-                {
-                    return StatusEnum.LOCALSAVED;
-                }
-                return StatusEnum.LOCALSAVED;
-
+                throw FireFormsException.from(response.StatusCode);
             }
 
         }
@@ -214,7 +187,7 @@ namespace FireForms.Database
         {
             var mobj = BsonMapper.Global.ToDocument<T>(obj);
             HttpClient client = new HttpClient();
-            var response = await client.DeleteAsync($"{firebaseDatabase.DatabaseURL}/{firebaseDatabase.Target}/{mobj["_id"].AsString}.json").ConfigureAwait(false);
+            var response = await client.DeleteAsync($"{FirebaseDatabase.DatabaseURL}/{FirebaseDatabase.Target}/{mobj["_id"].AsString}.json").ConfigureAwait(false);
             if (response.IsSuccessStatusCode)
             {
                 Collection.Delete(mobj["_id"].AsString);
@@ -229,7 +202,7 @@ namespace FireForms.Database
         {
             var mobj = BsonMapper.Global.ToDocument<T>(Collection.FindOne(predicate));
             HttpClient client = new HttpClient();
-            var response = await client.DeleteAsync($"{firebaseDatabase.DatabaseURL}/{firebaseDatabase.Target}/{mobj["_id"].AsString}.json").ConfigureAwait(false);
+            var response = await client.DeleteAsync($"{FirebaseDatabase.DatabaseURL}/{FirebaseDatabase.Target}/{mobj["_id"].AsString}.json").ConfigureAwait(false);
             if (response.IsSuccessStatusCode)
             {
                 Collection.Delete(mobj["_id"].AsString);
@@ -247,7 +220,7 @@ namespace FireForms.Database
             HttpClient client = new HttpClient();
             try
             {
-                var response = await client.GetAsync(firebaseDatabase.FullUri).ConfigureAwait(false);
+                var response = await client.GetAsync(FirebaseDatabase.FullUri).ConfigureAwait(false);
                 var responseData = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                 if (responseData == "null")
                 {
@@ -310,13 +283,7 @@ namespace FireForms.Database
             }
             catch (Exception)
             {
-                values = Collection.FindAll();
-
-                if (values == null)
-                {
-                    throw FireFormsException.from(System.Net.HttpStatusCode.NotFound);
-                }
-                return values;
+                throw;
             }
         }
 
@@ -324,7 +291,7 @@ namespace FireForms.Database
         {
             T obj;
             HttpClient client = new HttpClient();
-            var response = await client.GetAsync(firebaseDatabase.DatabaseURL).ConfigureAwait(false);
+            var response = await client.GetAsync(FirebaseDatabase.DatabaseURL).ConfigureAwait(false);
             var responseData = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (response.IsSuccessStatusCode)
             {
@@ -350,11 +317,6 @@ namespace FireForms.Database
                 }
                 return obj;
             }
-        }
-
-        public int Sync()
-        {
-            throw new NotImplementedException();
         }
     }
 }

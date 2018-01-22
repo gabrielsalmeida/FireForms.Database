@@ -29,5 +29,11 @@
 
   <ItemGroup>
     <Folder Include="Exceptions\" />
+    <Folder Include="Model\" />
+    <Folder Include="Auth\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="IFirebaseDoc1.cs" />
+    <Compile Remove="Auth\IOAuthUser.cs" />
   </ItemGroup>
 </Project>

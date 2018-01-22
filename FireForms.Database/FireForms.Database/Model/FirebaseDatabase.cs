@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 
-namespace FireForms.Database
+namespace FireForms.Database.Model
 {
     public class FirebaseDatabase
     {
@@ -12,7 +12,7 @@ namespace FireForms.Database
             this.databaseURL = new Uri(databaseURL);
         }
 
-        public FirebaseDatabase(string databaseURL, string authToken)
+        public FirebaseDatabase(string databaseURL, String authToken)
         {
             this.databaseURL = new Uri(databaseURL);
             this.AccessToken = authToken;
@@ -35,7 +35,7 @@ namespace FireForms.Database
             get { return databaseURL; }
         }
 
-        public string AccessToken { get; set; }
+        public String AccessToken { get; set; }
 
         public string RefreshToken { get; set; }
 
@@ -49,10 +49,20 @@ namespace FireForms.Database
             
         }
 
+        private Uri fullUri;
+
         public Uri FullUri
         {
-            get;
-            set;
+            get
+            {
+                UriBuilder uriBuilder = new UriBuilder(fullUri);
+                FullUri = SetToken(uriBuilder);
+                return fullUri;
+            }
+            set
+            {
+                fullUri = value;
+            }
         }
 
         public FirebaseDatabase Child(string path)
@@ -67,17 +77,19 @@ namespace FireForms.Database
         {
             UriBuilder uriBuilder = new UriBuilder(databaseURL);
             uriBuilder.Path += path + ".json";
-            if (AccessToken != null)
-            {
-                string query = String.Format("?auth={0}", AccessToken);
-                uriBuilder.Query = query;
-            }
             target = path;
-            FullUri = uriBuilder.Uri;            
+            FullUri = uriBuilder.Uri;           
             return this;
         }
 
-
+        private Uri SetToken(UriBuilder uriBuilder)
+        {
+            if (!string.IsNullOrWhiteSpace(AccessToken))
+            {
+                uriBuilder.Query = String.Format("?auth={0}", AccessToken);
+            }
+            return uriBuilder.Uri;
+        }
 
     }
 }
