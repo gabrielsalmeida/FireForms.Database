@@ -9,9 +9,6 @@ namespace FireForms.Database.Auth
         {
         }
 
-        protected string GoogleIdentityUrl = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyAssertion?key=";
-        protected string GooglePasswordUrl = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=";
-
         public FirebaseAuthType Provider { get; set; }
 
         public abstract StringContent GetPostBodySignInRequest();

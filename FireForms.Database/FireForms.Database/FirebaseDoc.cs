@@ -126,7 +126,7 @@ namespace FireForms.Database
                         }
                         break;
                     }
-                    
+
                 case "patch":
                     {
                         var result = JObject.Parse(serverData);
@@ -142,7 +142,7 @@ namespace FireForms.Database
                         }
                         break;
                     }
-                    
+
                 case "keep-alive":
                     break;
                 case "cancel":
@@ -158,7 +158,7 @@ namespace FireForms.Database
         {
             isListening = false;
         }
-        
+
 
         public void DeleteAll()
         {
@@ -171,7 +171,7 @@ namespace FireForms.Database
             Collection.Upsert(obj);
             var mobj = BsonMapper.Global.ToDocument<T>(obj);
             HttpClient client = new HttpClient();
-            var response = await client.PutAsync($"{FirebaseDatabase.DatabaseURL}/{FirebaseDatabase.Target}/{mobj["_id"].AsString}.json", new StringContent(JsonConvert.SerializeObject(obj), Encoding.UTF8, "application/json")).ConfigureAwait(false);
+            var response = await client.PutAsync(FirebaseDatabase.FullUri, new StringContent(JsonConvert.SerializeObject(obj), Encoding.UTF8, "application/json")).ConfigureAwait(false);
             if (response.IsSuccessStatusCode)
             {
                 return StatusEnum.ALLSUCCESS;
@@ -187,7 +187,7 @@ namespace FireForms.Database
         {
             var mobj = BsonMapper.Global.ToDocument<T>(obj);
             HttpClient client = new HttpClient();
-            var response = await client.DeleteAsync($"{FirebaseDatabase.DatabaseURL}/{FirebaseDatabase.Target}/{mobj["_id"].AsString}.json").ConfigureAwait(false);
+            var response = await client.DeleteAsync(FirebaseDatabase.FullUri).ConfigureAwait(false);
             if (response.IsSuccessStatusCode)
             {
                 Collection.Delete(mobj["_id"].AsString);
@@ -202,7 +202,7 @@ namespace FireForms.Database
         {
             var mobj = BsonMapper.Global.ToDocument<T>(Collection.FindOne(predicate));
             HttpClient client = new HttpClient();
-            var response = await client.DeleteAsync($"{FirebaseDatabase.DatabaseURL}/{FirebaseDatabase.Target}/{mobj["_id"].AsString}.json").ConfigureAwait(false);
+            var response = await client.DeleteAsync(FirebaseDatabase.FullUri).ConfigureAwait(false);
             if (response.IsSuccessStatusCode)
             {
                 Collection.Delete(mobj["_id"].AsString);
@@ -226,7 +226,8 @@ namespace FireForms.Database
                 {
                     return null;
                 }
-                if (!response.IsSuccessStatusCode){
+                if (!response.IsSuccessStatusCode)
+                {
                     throw FireFormsException.from(response.StatusCode);
                 }
                 var settings = new JsonSerializerSettings
@@ -313,7 +314,7 @@ namespace FireForms.Database
                     {
                         throw FireFormsException.from(response.StatusCode);
                     }
-					
+
                 }
                 return obj;
             }

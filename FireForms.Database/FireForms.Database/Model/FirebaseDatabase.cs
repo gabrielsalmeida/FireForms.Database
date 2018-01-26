@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
+using FireForms.Database.Auth;
 
 namespace FireForms.Database.Model
 {
@@ -18,6 +18,13 @@ namespace FireForms.Database.Model
             this.AccessToken = authToken;
         }
 
+        public FirebaseDatabase(string databaseURL, FirebaseUser firebaseUser)
+        {
+            this.databaseURL = new Uri(databaseURL);
+            this.AccessToken = firebaseUser.idToken;
+            this.FirebaseUser = firebaseUser;
+        }
+
         public FirebaseDatabase(string databaseURL, string authToken, string refreshToken, string apiKey)
         {
             this.databaseURL = new Uri(databaseURL);
@@ -27,6 +34,7 @@ namespace FireForms.Database.Model
         }
 
 
+        public FirebaseUser FirebaseUser { get; set; }
 
         private Uri databaseURL;
 

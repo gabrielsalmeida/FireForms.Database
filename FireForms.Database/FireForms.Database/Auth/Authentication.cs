@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using LiteDB;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace FireForms.Database.Auth
 {
-    class Authentication : IAuthentication
+    public class Authentication : IAuthentication
     {
         private string GoogleIdentityUrl;
         private string GoogleSignUpUrl;
@@ -28,6 +29,46 @@ namespace FireForms.Database.Auth
             GoogleSetAccountUrl = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/setAccountInfo?key=" + apiKey;
             RefreshTokenUrl = "https://securetoken.googleapis.com/v1/token?key=" + apiKey;
 
+        }
+
+        public Authentication(string apiKey, string localDBpath)
+        {
+            Init(localDBpath);
+            this.apiKey = apiKey;
+            GoogleIdentityUrl = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyAssertion?key=" + apiKey;
+            GoogleSignUpUrl = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=" + apiKey;
+            GooglePasswordUrl = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=" + apiKey;
+            GooglePasswordResetUrl = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/getOobConfirmationCode?key=" + apiKey;
+            GoogleSetAccountUrl = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/setAccountInfo?key=" + apiKey;
+            RefreshTokenUrl = "https://securetoken.googleapis.com/v1/token?key=" + apiKey;
+
+        }
+
+        public LiteCollection<FirebaseUser> Collection { get; set; }
+
+        private LiteDatabase liteDatabase;
+
+        private void Init(string LocalDBpath)
+        {
+            using (liteDatabase = new LiteDatabase(LocalDBpath))
+            {
+                Collection = liteDatabase.GetCollection<FirebaseUser>(typeof(FirebaseUser).Name);
+            }
+        }
+
+        public void ClearFirebaseUser()
+        {
+            liteDatabase.DropCollection(typeof(FirebaseUser).Name);
+        }
+
+        private void Upsert(FirebaseUser firebaseUser)
+        {
+            Collection.Upsert(firebaseUser);
+        }
+
+        public FirebaseUser GetCachedUser()
+        {
+            return Collection.FindOne(Query.All());
         }
 
         public async Task ChangePasswordAsync(FirebaseUser firebaseUser, string newPassword)
@@ -71,9 +112,12 @@ namespace FireForms.Database.Auth
                     response.EnsureSuccessStatusCode();
                 }
             }
+            firebaseUser = JsonConvert.DeserializeObject<FirebaseUser>(responseData);
+            if (Collection != null)
+            {
+                Upsert(firebaseUser);
+            }
 
-            var userdto = JsonConvert.DeserializeObject<FirebaseUser>(responseData);
-            firebaseUser = userdto;
         }
 
         public async Task LinkWithEmailAndPassword(EmailUser user, FirebaseUser firebaseUser)
@@ -120,6 +164,10 @@ namespace FireForms.Database.Auth
 
             var userdto = JsonConvert.DeserializeObject<FirebaseUser>(responseData);
             firebaseUser = userdto;
+            if (Collection != null)
+            {
+                Upsert(firebaseUser);
+            }
         }
 
         public Task LinkWithOAuthCredential(IUser user, FirebaseUser firebaseUser)
@@ -195,16 +243,12 @@ namespace FireForms.Database.Auth
                     response.EnsureSuccessStatusCode();
                 }
             }
-
-            var userdto = JsonConvert.DeserializeObject<FirebaseUser>(responseData);
-            return userdto;
-        }
-
-        private Uri LoginURL(FirebaseAuthType authType)
-        {
-            if (authType is FirebaseAuthType.LoginAndPassword)
-                return new Uri(GooglePasswordUrl);
-            return new Uri(GoogleIdentityUrl);
+            var firebaseUser = JsonConvert.DeserializeObject<FirebaseUser>(responseData);
+            if (Collection != null)
+            {
+                Upsert(firebaseUser);
+            }
+            return firebaseUser;
         }
 
         public async Task SignInWithPostContentAsync(IUser user, FirebaseUser firebaseUser)
@@ -246,7 +290,10 @@ namespace FireForms.Database.Auth
                     response.EnsureSuccessStatusCode();
                 }
             }
-
+            if (Collection != null)
+            {
+                Upsert(firebaseUser);
+            }
             firebaseUser = JsonConvert.DeserializeObject<FirebaseUser>(responseData);
         }
 
@@ -289,8 +336,12 @@ namespace FireForms.Database.Auth
                     response.EnsureSuccessStatusCode();
                 }
             }
-
-            return JsonConvert.DeserializeObject<FirebaseUser>(responseData);
+            var firebaseUser = JsonConvert.DeserializeObject<FirebaseUser>(responseData);
+            if (Collection != null)
+            {
+                Upsert(firebaseUser);
+            }
+            return firebaseUser;
         }
 
 
@@ -336,8 +387,12 @@ namespace FireForms.Database.Auth
                     response.EnsureSuccessStatusCode();
                 }
             }
-
-            return JsonConvert.DeserializeObject<FirebaseUser>(responseData);
+            var firebaseUser = JsonConvert.DeserializeObject<FirebaseUser>(responseData);
+            if (Collection != null)
+            {
+                Upsert(firebaseUser);
+            }
+            return firebaseUser;
 
         }
 
@@ -382,16 +437,11 @@ namespace FireForms.Database.Auth
                     response.EnsureSuccessStatusCode();
                 }
             }
-
             firebaseUser = JsonConvert.DeserializeObject<FirebaseUser>(responseData);
-        }
-
-        private async Task SaveUserFirebase(FirebaseUser firebaseUser)
-        {
-            HttpClient client = new HttpClient();
-            var response = await client.PutAsync(new Uri(String.Format("https://quantocusta-164215.firebaseio.com/users/{0}/user.json?access_token={1}", firebaseUser.localId, firebaseUser.idToken)), new StringContent(JsonConvert.SerializeObject(firebaseUser), Encoding.UTF8, "application/json")).ConfigureAwait(false);
-            //var responseData = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-
+            if (Collection != null)
+            {
+                Upsert(firebaseUser);
+            }
         }
 
         public async Task RefreshToken(FirebaseUser firebaseUser)
@@ -419,6 +469,10 @@ namespace FireForms.Database.Auth
             firebaseUser.expiresIn = obj["expires_in"];
             firebaseUser.refreshToken = obj["refresh_token"];
             firebaseUser.idToken = obj["id_token"];
+            if (Collection != null)
+            {
+                Upsert(firebaseUser);
+            }
         }
 
         private async Task MaintainUserAuth(FirebaseUser firebaseUser)
@@ -458,6 +512,10 @@ namespace FireForms.Database.Auth
                 firebaseUser.expiresIn = obj["expires_in"];
                 firebaseUser.refreshToken = obj["refresh_token"];
                 firebaseUser.idToken = obj["id_token"];
+                if (Collection != null)
+                {
+                    Upsert(firebaseUser);
+                }
             }
 
 

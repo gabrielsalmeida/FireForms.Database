@@ -8,7 +8,16 @@ namespace FireForms.Database.Auth
     {
         public EmailUser()
         {
+            Provider = FirebaseAuthType.LoginAndPassword;
         }
+
+        public EmailUser(string email, string password)
+        {
+            Provider = FirebaseAuthType.LoginAndPassword;
+            this.Email = email;
+            this.Password = password;
+        }
+
         public string Email { get; set; }
         public string Password { get; set; }
 
@@ -20,7 +29,7 @@ namespace FireForms.Database.Auth
 
         public override Uri GetUrl(string apiKey)
         {
-            return new Uri(GooglePasswordUrl + apiKey);
+            return new Uri("https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyAssertion?key=" + apiKey);
         }
     }
 }

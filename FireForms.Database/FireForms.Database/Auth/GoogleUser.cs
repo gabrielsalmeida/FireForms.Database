@@ -9,6 +9,12 @@ namespace FireForms.Database.Auth
     {
         public GoogleUser()
         {
+            Provider = FirebaseAuthType.Google;
+        }
+        public GoogleUser(string idToken)
+        {
+            Provider = FirebaseAuthType.Google;
+            this.Token = idToken;
         }
 
         public override StringContent GetPostBodySignInRequest()

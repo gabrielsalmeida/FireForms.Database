@@ -13,7 +13,7 @@ namespace FireForms.Database.Auth
 
         public override Uri GetUrl(string apiKey)
         {
-            return new Uri(GoogleIdentityUrl + apiKey);
+            return new Uri("https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyAssertion?key=" + apiKey);
         }
 
     }

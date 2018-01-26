@@ -7,7 +7,7 @@ namespace FireForms.Database.Auth
         {
 
         }
-
+        public int id { get; set; }
         public string kind { get; set; }
         public string federatedId { get; set; }
         public string providerId { get; set; }

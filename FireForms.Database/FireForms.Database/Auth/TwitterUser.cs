@@ -9,7 +9,16 @@ namespace FireForms.Database.Auth
     {
         public TwitterUser()
         {
+            Provider = FirebaseAuthType.Twitter;
         }
+
+        public TwitterUser(string idToken, string tokenSecret)
+        {
+            Provider = FirebaseAuthType.Twitter;
+            this.Token = idToken;
+            this.TokenSecret = tokenSecret;
+        }
+
         public string TokenSecret { get; set; }
 
         public override StringContent GetPostBodySignInRequest()

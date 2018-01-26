@@ -9,6 +9,13 @@ namespace FireForms.Database.Auth
     {
         public FacebookUser()
         {
+            Provider = FirebaseAuthType.Facebook;
+        }
+
+        public FacebookUser(string idToken)
+        {
+            Provider = FirebaseAuthType.Facebook;
+            this.Token = idToken;
         }
 
         public override StringContent GetPostBodySignInRequest()
