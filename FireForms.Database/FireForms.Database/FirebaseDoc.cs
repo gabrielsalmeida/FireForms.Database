@@ -242,8 +242,16 @@ namespace FireForms.Database
                 }
                 catch (JsonSerializationException)
                 {
+                    try
+                    {
                     var arr = JsonConvert.DeserializeObject<IEnumerable<T>>(responseData, settings);
                     values = arr.Where(x => x != null).ToArray<T>();
+                    }
+                    catch(JsonSerializationException)
+                    {
+                        var arr = JsonConvert.DeserializeObject<T>(responseData, settings);
+                        values = new[] { arr };
+                    }
                 }
                 try
                 {
