@@ -162,8 +162,7 @@ namespace FireForms.Database
 
         public void DeleteAll()
         {
-            liteDatabase.DropCollection(typeof(T).Name);
-
+            Collection.Delete(Query.All());
         }
 
         public async Task<StatusEnum> UpsertAsync(T obj)
@@ -171,7 +170,8 @@ namespace FireForms.Database
             Collection.Upsert(obj);
             var mobj = BsonMapper.Global.ToDocument<T>(obj);
             HttpClient client = new HttpClient();
-            var response = await client.PutAsync(FirebaseDatabase.FullUri, new StringContent(JsonConvert.SerializeObject(obj), Encoding.UTF8, "application/json")).ConfigureAwait(false);
+            var link = FirebaseDatabase.FirebaseUser.idToken == null ? $"{FirebaseDatabase.DatabaseURL}/{FirebaseDatabase.Target}/{mobj["_id"].AsString}.json" : $"{FirebaseDatabase.DatabaseURL}/{FirebaseDatabase.Target}/{mobj["_id"].AsString}.json?auth={FirebaseDatabase.FirebaseUser.idToken}";
+            var response = await client.PutAsync(link, new StringContent(JsonConvert.SerializeObject(obj), Encoding.UTF8, "application/json")).ConfigureAwait(false);
             if (response.IsSuccessStatusCode)
             {
                 return StatusEnum.ALLSUCCESS;
@@ -187,7 +187,8 @@ namespace FireForms.Database
         {
             var mobj = BsonMapper.Global.ToDocument<T>(obj);
             HttpClient client = new HttpClient();
-            var response = await client.DeleteAsync(FirebaseDatabase.FullUri).ConfigureAwait(false);
+            var link = FirebaseDatabase.FirebaseUser.idToken == null ? $"{FirebaseDatabase.DatabaseURL}/{FirebaseDatabase.Target}/{mobj["_id"].AsString}.json" : $"{FirebaseDatabase.DatabaseURL}/{FirebaseDatabase.Target}/{mobj["_id"].AsString}.json?auth={FirebaseDatabase.FirebaseUser.idToken}";
+            var response = await client.DeleteAsync(link).ConfigureAwait(false);
             if (response.IsSuccessStatusCode)
             {
                 Collection.Delete(mobj["_id"].AsString);

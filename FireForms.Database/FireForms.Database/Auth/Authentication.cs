@@ -58,7 +58,7 @@ namespace FireForms.Database.Auth
 
         public void ClearFirebaseUser()
         {
-            liteDatabase.DropCollection(typeof(FirebaseUser).Name);
+            Collection.Delete(Query.All());
         }
 
         private void Upsert(FirebaseUser firebaseUser)

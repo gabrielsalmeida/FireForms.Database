@@ -54,7 +54,7 @@ namespace FireForms.Database.Model
         public String Target
         {
             get { return target; }
-            
+
         }
 
         private Uri fullUri;
@@ -77,7 +77,7 @@ namespace FireForms.Database.Model
         {
             UriBuilder uriBuilder = new UriBuilder(databaseURL);
             uriBuilder.Path += path + "/";
-            databaseURL = uriBuilder.Uri;            
+            databaseURL = uriBuilder.Uri;
             return this;
         }
 
@@ -86,15 +86,22 @@ namespace FireForms.Database.Model
             UriBuilder uriBuilder = new UriBuilder(databaseURL);
             uriBuilder.Path += path + ".json";
             target = path;
-            FullUri = uriBuilder.Uri;           
+            FullUri = uriBuilder.Uri;
             return this;
         }
 
         private Uri SetToken(UriBuilder uriBuilder)
         {
-            if (!string.IsNullOrWhiteSpace(AccessToken))
+            if (FirebaseUser != null)
             {
-                uriBuilder.Query = String.Format("?auth={0}", AccessToken);
+                uriBuilder.Query = String.Format("?auth={0}", FirebaseUser.idToken);
+            }
+            else
+            {
+                if (!string.IsNullOrWhiteSpace(AccessToken))
+                {
+                    uriBuilder.Query = String.Format("?auth={0}", AccessToken);
+                }
             }
             return uriBuilder.Uri;
         }
