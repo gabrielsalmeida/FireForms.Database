@@ -202,8 +202,9 @@ namespace FireForms.Database
         public async Task DeleteAsync(Expression<Func<T, bool>> predicate)
         {
             var mobj = BsonMapper.Global.ToDocument<T>(Collection.FindOne(predicate));
+            var link = FirebaseDatabase.FirebaseUser.idToken == null ? $"{FirebaseDatabase.DatabaseURL}/{FirebaseDatabase.Target}/{mobj["_id"].AsString}.json" : $"{FirebaseDatabase.DatabaseURL}/{FirebaseDatabase.Target}/{mobj["_id"].AsString}.json?auth={FirebaseDatabase.FirebaseUser.idToken}";
             HttpClient client = new HttpClient();
-            var response = await client.DeleteAsync(FirebaseDatabase.FullUri).ConfigureAwait(false);
+            var response = await client.DeleteAsync(link).ConfigureAwait(false);
             if (response.IsSuccessStatusCode)
             {
                 Collection.Delete(mobj["_id"].AsString);

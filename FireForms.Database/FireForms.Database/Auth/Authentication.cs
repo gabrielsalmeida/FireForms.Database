@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using FireForms.Database.Exceptions;
 using LiteDB;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -444,7 +445,7 @@ namespace FireForms.Database.Auth
             }
         }
 
-        public async Task RefreshToken(FirebaseUser firebaseUser)
+        public async Task<FirebaseUser> RefreshToken(FirebaseUser firebaseUser)
         {
             HttpClient client = new HttpClient();
             var nvc = new List<KeyValuePair<string, string>>();
@@ -458,7 +459,7 @@ namespace FireForms.Database.Auth
             }
             if (!response.IsSuccessStatusCode)
             {
-                throw new Exception(response.StatusCode.ToString());
+                throw FireFormsException.from(response.StatusCode);
             }
             var settings = new JsonSerializerSettings
             {
@@ -473,6 +474,7 @@ namespace FireForms.Database.Auth
             {
                 Upsert(firebaseUser);
             }
+            return firebaseUser;
         }
 
         private async Task MaintainUserAuth(FirebaseUser firebaseUser)

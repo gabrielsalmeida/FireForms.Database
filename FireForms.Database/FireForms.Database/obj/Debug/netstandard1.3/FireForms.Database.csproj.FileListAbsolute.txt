@@ -19,7 +19,6 @@ D:/Projects/GitHubContributions/FireForms/FireForms.Database/FireForms.Database/
 /Users/gabrielsantosdealmeida/FireForms.Database/FireForms.Database/FireForms.Database/bin/Debug/net35/netstandard1.3/FireForms.Database.deps.json
 /Users/gabrielsantosdealmeida/FireForms.Database/FireForms.Database/FireForms.Database/bin/Debug/net35/netstandard1.3/FireForms.Database.dll
 /Users/gabrielsantosdealmeida/FireForms.Database/FireForms.Database/FireForms.Database/bin/Debug/net35/netstandard1.3/FireForms.Database.pdb
-/Users/gabrielsantosdealmeida/FireForms.Database/FireForms.Database/FireForms.Database/obj/Debug/netstandard1.3/FireForms.Database.csprojResolveAssemblyReference.cache
 /Users/gabrielsantosdealmeida/FireForms.Database/FireForms.Database/FireForms.Database/obj/Debug/netstandard1.3/FireForms.Database.csproj.CoreCompileInputs.cache
 /Users/gabrielsantosdealmeida/FireForms.Database/FireForms.Database/FireForms.Database/obj/Debug/netstandard1.3/FireForms.Database.AssemblyInfoInputs.cache
 /Users/gabrielsantosdealmeida/FireForms.Database/FireForms.Database/FireForms.Database/obj/Debug/netstandard1.3/FireForms.Database.AssemblyInfo.cs
