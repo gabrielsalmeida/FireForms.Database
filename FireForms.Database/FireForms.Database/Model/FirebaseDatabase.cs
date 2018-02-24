@@ -94,13 +94,13 @@ namespace FireForms.Database.Model
         {
             if (FirebaseUser != null)
             {
-                uriBuilder.Query = String.Format("?auth={0}", FirebaseUser.idToken);
+                uriBuilder.Query = String.Format("auth={0}", FirebaseUser.idToken);
             }
             else
             {
                 if (!string.IsNullOrWhiteSpace(AccessToken))
                 {
-                    uriBuilder.Query = String.Format("?auth={0}", AccessToken);
+                    uriBuilder.Query = String.Format("auth={0}", AccessToken);
                 }
             }
             return uriBuilder.Uri;

@@ -24,3 +24,12 @@ D:/Projects/GitHubContributions/FireForms/FireForms.Database/FireForms.Database/
 /Users/gabrielsantosdealmeida/FireForms.Database/FireForms.Database/FireForms.Database/obj/Debug/netstandard1.3/FireForms.Database.AssemblyInfo.cs
 /Users/gabrielsantosdealmeida/FireForms.Database/FireForms.Database/FireForms.Database/obj/Debug/netstandard1.3/FireForms.Database.dll
 /Users/gabrielsantosdealmeida/FireForms.Database/FireForms.Database/FireForms.Database/obj/Debug/netstandard1.3/FireForms.Database.pdb
+D:\Projects\GitHubContributions\FireForms-Database\FireForms.Database\FireForms.Database\bin\Debug\net35\netstandard1.3\FireForms.Database.deps.json
+D:\Projects\GitHubContributions\FireForms-Database\FireForms.Database\FireForms.Database\bin\Debug\net35\netstandard1.3\FireForms.Database.dll
+D:\Projects\GitHubContributions\FireForms-Database\FireForms.Database\FireForms.Database\bin\Debug\net35\netstandard1.3\FireForms.Database.pdb
+D:\Projects\GitHubContributions\FireForms-Database\FireForms.Database\FireForms.Database\obj\Debug\netstandard1.3\FireForms.Database.csprojResolveAssemblyReference.cache
+D:\Projects\GitHubContributions\FireForms-Database\FireForms.Database\FireForms.Database\obj\Debug\netstandard1.3\FireForms.Database.csproj.CoreCompileInputs.cache
+D:\Projects\GitHubContributions\FireForms-Database\FireForms.Database\FireForms.Database\obj\Debug\netstandard1.3\FireForms.Database.AssemblyInfoInputs.cache
+D:\Projects\GitHubContributions\FireForms-Database\FireForms.Database\FireForms.Database\obj\Debug\netstandard1.3\FireForms.Database.AssemblyInfo.cs
+D:\Projects\GitHubContributions\FireForms-Database\FireForms.Database\FireForms.Database\obj\Debug\netstandard1.3\FireForms.Database.dll
+D:\Projects\GitHubContributions\FireForms-Database\FireForms.Database\FireForms.Database\obj\Debug\netstandard1.3\FireForms.Database.pdb
