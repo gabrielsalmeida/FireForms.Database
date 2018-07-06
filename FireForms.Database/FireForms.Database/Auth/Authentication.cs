@@ -208,7 +208,7 @@ namespace FireForms.Database.Auth
             var json = $"{{\"email\":\"{user.Email}\",\"password\":\"{user.Password}\",\"returnSecureToken\":true}}";
             var content = new StringContent(json, Encoding.UTF8, "application/json");
             HttpClient client = new HttpClient();
-            var response = await client.PostAsync(user.GetUrl(apiKey), content).ConfigureAwait(false);
+            var response = await client.PostAsync(user.GetVerifyPassword(apiKey), content).ConfigureAwait(false);
             var responseData = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             if (!response.IsSuccessStatusCode)
             {

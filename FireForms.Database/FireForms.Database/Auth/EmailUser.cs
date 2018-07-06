@@ -27,6 +27,11 @@ namespace FireForms.Database.Auth
             return new StringContent(json, Encoding.UTF8, "application/json");
         }
 
+        public Uri GetVerifyPassword(string apiKey)
+        {
+            return new Uri("https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=" + apiKey);
+        }
+
         public override Uri GetUrl(string apiKey)
         {
             return new Uri("https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyAssertion?key=" + apiKey);
