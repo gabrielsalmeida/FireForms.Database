@@ -93,19 +93,19 @@ namespace FireForms.Database.Auth
                 // Invalid password supplied
                 else if (message.Equals("WEAK_PASSWORD"))
                 {
-                    throw new Exception("The password must be 6 characters long or more.");
+                    throw new WeakPasswordException("The password must be 6 characters long or more.");
                 }
                 // New User
                 // Email address already exists
                 else if (message.Equals("EMAIL_EXISTS"))
                 {
-                    throw new Exception("Email address already exists");
+                    throw new EmailAlreadyExistsException("Email address already exists");
                 }
                 // New User
                 // Week Password
                 else if (message.Contains("WEAK_PASSWORD"))
                 {
-                    throw new Exception("Weak password, must be at least 6 characters");
+                    throw new WeakPasswordException("Weak password, must be at least 6 characters");
                 }
                 // Just end on default status check
                 else
@@ -136,25 +136,25 @@ namespace FireForms.Database.Auth
                 // Email address not found in database
                 if (message.Equals("EMAIL_NOT_FOUND"))
                 {
-                    throw new Exception("Email address not found");
+                    throw new EmailNotFoundException("Email address not found");
                 }
                 // Login
                 // Invalid password supplied
                 else if (message.Equals("INVALID_PASSWORD"))
                 {
-                    throw new Exception("Incorrect passord");
+                    throw new InvalidPasswordException("Incorrect passord");
                 }
                 // New User
                 // Email address already exists
                 else if (message.Equals("EMAIL_EXISTS"))
                 {
-                    throw new Exception("Email address already exists");
+                    throw new EmailAlreadyExistsException("Email address already exists");
                 }
                 // New User
                 // Week Password
                 else if (message.Contains("WEAK_PASSWORD"))
                 {
-                    throw new Exception("Weak password, must be at least 6 characters");
+                    throw new WeakPasswordException("Weak password, must be at least 6 characters");
                 }
                 // Just end on default status check
                 else
@@ -193,7 +193,7 @@ namespace FireForms.Database.Auth
                 // Email address not found in database
                 if (message.Equals("EMAIL_NOT_FOUND"))
                 {
-                    throw new Exception("Email address not found");
+                    throw new EmailNotFoundException("Email address not found");
                 }
                 else
                 {
@@ -218,25 +218,25 @@ namespace FireForms.Database.Auth
                 // Email address not found in database
                 if (message.Equals("EMAIL_NOT_FOUND"))
                 {
-                    throw new Exception("Email address not found");
+                    throw new EmailNotFoundException("Email address not found");
                 }
                 // Login
                 // Invalid password supplied
                 else if (message.Equals("INVALID_PASSWORD"))
                 {
-                    throw new Exception("Incorrect passord");
+                    throw new InvalidPasswordException("Incorrect passord");
                 }
                 // New User
                 // Email address already exists
                 else if (message.Equals("EMAIL_EXISTS"))
                 {
-                    throw new Exception("Email address already exists");
+                    throw new EmailAlreadyExistsException("Email address already exists");
                 }
                 // New User
                 // Week Password
                 else if (message.Contains("WEAK_PASSWORD"))
                 {
-                    throw new Exception("Weak password, must be at least 6 characters");
+                    throw new WeakPasswordException("Weak password, must be at least 6 characters");
                 }
                 // Just end on default status check
                 else
@@ -265,25 +265,25 @@ namespace FireForms.Database.Auth
                 // Email address not found in database
                 if (message.Equals("EMAIL_NOT_FOUND"))
                 {
-                    throw new Exception("Email address not found");
+                    throw new EmailNotFoundException("Email address not found");
                 }
                 // Login
                 // Invalid password supplied
                 else if (message.Equals("INVALID_PASSWORD"))
                 {
-                    throw new Exception("Incorrect passord");
+                    throw new InvalidPasswordException("Incorrect passord");
                 }
                 // New User
                 // Email address already exists
                 else if (message.Equals("EMAIL_EXISTS"))
                 {
-                    throw new Exception("Email address already exists");
+                    throw new EmailAlreadyExistsException("Email address already exists");
                 }
                 // New User
                 // Week Password
                 else if (message.Contains("WEAK_PASSWORD"))
                 {
-                    throw new Exception("Weak password, must be at least 6 characters");
+                    throw new WeakPasswordException("Weak password, must be at least 6 characters");
                 }
                 // Just end on default status check
                 else
@@ -311,25 +311,25 @@ namespace FireForms.Database.Auth
                 // Email address not found in database
                 if (message.Equals("EMAIL_NOT_FOUND"))
                 {
-                    throw new Exception("Email address not found");
+                    throw new EmailNotFoundException();
                 }
                 // Login
                 // Invalid password supplied
                 else if (message.Equals("INVALID_PASSWORD"))
                 {
-                    throw new Exception("Incorrect passord");
+                    throw new InvalidPasswordException();
                 }
                 // New User
                 // Email address already exists
                 else if (message.Equals("EMAIL_EXISTS"))
                 {
-                    throw new Exception("Email address already exists");
+                    throw new EmailAlreadyExistsException();
                 }
                 // New User
-                // Week Password
+                // Weak Password
                 else if (message.Contains("WEAK_PASSWORD"))
                 {
-                    throw new Exception("Weak password, must be at least 6 characters");
+                    throw new WeakPasswordException();
                 }
                 // Just end on default status check
                 else
@@ -362,25 +362,25 @@ namespace FireForms.Database.Auth
                 // Email address not found in database
                 if (message.Equals("TOO_MANY_ATTEMPTS_TRY_LATER"))
                 {
-                    throw new Exception("We have blocked all requests from this device due to unusual activity. Try again later.");
+                    throw new TooManyAttemptsException("We have blocked all requests from this device due to unusual activity. Try again later.");
                 }
                 // Login
                 // Invalid password supplied
                 else if (message.Equals("OPERATION_NOT_ALLOWED"))
                 {
-                    throw new Exception("Password sign-in is disabled for this project.");
+                    throw new OperationNotAllowedException("Password sign-in is disabled for this project.");
                 }
                 // New User
                 // Email address already exists
                 else if (message.Equals("EMAIL_EXISTS"))
                 {
-                    throw new Exception("Email address already exists");
+                    throw new EmailAlreadyExistsException("Email address already exists");
                 }
                 // New User
                 // Week Password
                 else if (message.Contains("WEAK_PASSWORD"))
                 {
-                    throw new Exception("Weak password, must be at least 6 characters");
+                    throw new WeakPasswordException("Weak password, must be at least 6 characters");
                 }
                 // Just end on default status check
                 else
@@ -412,25 +412,25 @@ namespace FireForms.Database.Auth
                 // Email address not found in database
                 if (message.Equals("TOO_MANY_ATTEMPTS_TRY_LATER"))
                 {
-                    throw new Exception("We have blocked all requests from this device due to unusual activity. Try again later.");
+                    throw new TooManyAttemptsException("We have blocked all requests from this device due to unusual activity. Try again later.");
                 }
                 // Login
                 // Invalid password supplied
                 else if (message.Equals("OPERATION_NOT_ALLOWED"))
                 {
-                    throw new Exception("Password sign-in is disabled for this project.");
+                    throw new OperationNotAllowedException("Password sign-in is disabled for this project.");
                 }
                 // New User
                 // Email address already exists
                 else if (message.Equals("EMAIL_EXISTS"))
                 {
-                    throw new Exception("Email address already exists");
+                    throw new EmailAlreadyExistsException("Email address already exists");
                 }
                 // New User
                 // Week Password
                 else if (message.Contains("WEAK_PASSWORD"))
                 {
-                    throw new Exception("Weak password, must be at least 6 characters");
+                    throw new WeakPasswordException("Weak password, must be at least 6 characters");
                 }
                 // Just end on default status check
                 else
